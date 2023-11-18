@@ -1,0 +1,393 @@
+\chapter{Solutions}
+
+\section{Probability}
+
+1. ii) and iv).
+
+\noindent 2. iii).
+
+\section{Learning with Gradient}
+
+1. ii).
+
+\noindent 2. Sections: 2.4.
+
+\section{Neural Networks}
+
+1. v). 
+
+\noindent 2. iii).
+
+\noindent 3. iv).
+
+\noindent 4. i).
+
+\noindent 5. iii).
+
+\noindent 6. i).
+
+\noindent 7. iii) and iv).
+
+\noindent 8. Subsection: 3.1.1. 
+
+\noindent 9. Sections: 3.1 (Subsection 3.1.1).
+
+\noindent 10. Section: 3.3. 
+
+\noindent 11. Answer same as number 10.
+
+\newpage
+\section{Backpropagation}
+
+1. Section: 4.0. 
+
+\noindent 2. We need to compute $ \frac{\partial J}{\partial W_{1, 1}^{(1)}}$
+
+
+$$ h^{(1)} = W^{(1)}x + b^{(1)} = \begin{pmatrix} 0.75 & 0.5 \\ -1 & 1  \end{pmatrix} \begin{pmatrix} 1 \\ 0.5 \end{pmatrix} + \begin{pmatrix} 0 \\ 0 \end{pmatrix} = \begin{pmatrix} 1 \\ -0.5 \end{pmatrix} ~~~~~  a^{(1)} = ReLU (h^{(1)}) = \begin{pmatrix} 1 \\ 0 \end{pmatrix} $$
+
+$$ h^{(2)} = (w^{(2)})^T a^{(1)} + b^{(2)} = \begin{pmatrix} 1 & 1 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} - 1 = 0  ~~~~~ y = \sigma(h^{(2)}) = \sigma(0) = 0.5 $$
+
+$$ J = \frac{1}{2} (t - y)^2 = \frac{1}{2} (1 - 0.5)^2 = \frac{1}{8} $$
+
+$$ \frac{\partial J}{\partial W_{1, 1}^{(1)}} = \frac{1}{2} \frac{\partial (1 - y)^2}{\partial W_{1, 1}^{(1)}} = 
+-(1 - y) \frac{\partial y}{\partial W_{1, 1}^{(1)}} = -0.5 \frac{\sigma(h^{(2)})}{\partial W_{1, 1}^{(1)}} = -0.5~  \sigma(h^{(2)}) (1 - \sigma(h^{(2)})) \frac{ \partial h^{(2)} }{\partial W_{1, 1}^{(1)}} =  $$
+
+$$ = -\frac{1}{8} \frac{\partial ( (w^{(2)})^T a^{(1)} + b^{(2) ) }}{\partial W_{1, 1}^{(1)}} =  -\frac{1}{8}(w^{(2)})^T \frac{\partial a^{(1)}}{\partial W_{1, 1}^{(1)}} = -\frac{1}{8}(w^{(2)})^T \frac{\partial ReLU(h^{(1)})}{\partial W_{1, 1}^{(1)}} =  $$
+
+$$ = -\frac{1}{8} \frac{\partial W^{(1)}x + b^{(1)}}{\partial W_{1, 1}^{(1)}} = -\frac{1}{8} x_1  = -\frac{1}{8} $$
+
+
+
+\noindent 3. We need to compute $ \frac{\partial J}{\partial W^{(1)}}$ and $\frac{\partial J}{\partial W^{(2)}} $
+
+$$ h^{(1)} = W^{(1)}x + b^{(1)} = \begin{pmatrix} 0.5 & 0.75 \\ 1 & -1  \end{pmatrix} \begin{pmatrix} 0.5 \\ 1 \end{pmatrix} + \begin{pmatrix} 0 \\ 0 \end{pmatrix} = \begin{pmatrix} 1 \\ -0.5 \end{pmatrix} ~~~~~  a^{(1)} = ReLU (h^{(1)}) = \begin{pmatrix} 1 \\ 0 \end{pmatrix} $$
+
+$$ h^{(2)} = (w^{(2)})^T a^{(1)} + b^{(2)} = \begin{pmatrix} 1 & 2 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} - 1 = 0  ~~~~~ y = \sigma(h^{(2)}) = \sigma(0) = 0.5 $$
+
+$$ J = \frac{1}{2} (t - y)^2 = \frac{1}{2} (1 - 0.5)^2 = \frac{1}{8} $$
+
+
+\noindent Let's first compute $\frac{\partial J}{\partial W^{(1)}}$
+
+$$ \frac{\partial J}{\partial W^{(1)}} = \frac{1}{2} \frac{\partial (1 - y)^2}{\partial W^{(1)}} = 
+-(1 - y) \frac{\partial y}{\partial W^{(1)}} = -0.5 \frac{\sigma(h^{(2)})}{\partial W^{(1)}} = -0.5~  \sigma(h^{(2)}) (1 - \sigma(h^{(2)})) \frac{ \partial h^{(2)} }{\partial W^{(1)}} =  $$
+
+$$ = -\frac{1}{8} \frac{\partial ( (w^{(2)})^T a^{(1)} + b^{(2) ) }}{\partial W^{(1)}} =  -\frac{1}{8}(w^{(2)})^T \frac{\partial a^{(1)}}{\partial W^{(1)}} = -\frac{1}{8}(w^{(2)})^T \frac{\partial ReLU(h^{(1)})}{\partial W^{(1)}} =  $$
+
+$$ = -\frac{1}{8} \frac{\partial W^{(1)}x + b^{(1)}}{\partial W^{(1)}} = -\frac{1}{8} x  = -\frac{1}{8} \begin{pmatrix} 0.5 \\ 1 \end{pmatrix}  $$
+
+\newpage
+\noindent Let's now compute $\frac{\partial J}{\partial W^{(2)}}$
+
+$$ \frac{\partial J}{\partial W^{(2)}} = \frac{1}{2} \frac{\partial (1 - y)^2}{\partial W^{(2)}} = 
+-(1 - y) \frac{\partial y}{\partial W^{(2)}} = -0.5 \frac{\sigma(h^{(2)})}{\partial W^{(2)}} = -0.5~  \sigma(h^{(2)}) (1 - \sigma(h^{(2)})) \frac{ \partial h^{(2)} }{\partial W^{(2)}} =  $$
+
+$$ = -\frac{1}{8} \frac{\partial ( (w^{(2)})^T a^{(1)} + b^{(2) ) }}{\partial W^{(2)}} = -\frac{1}{8}  a^{(1)}  = -\frac{1}{8} \begin{pmatrix} 1 \\ 0 \end{pmatrix}  $$
+
+\noindent 4. We need to compute $ \frac{\partial J}{\partial W^{(1)}}$ and $\frac{\partial J}{\partial W^{(2)}} $
+
+$$ h^{(1)} = W^{(1)}x + b^{(1)} = \begin{pmatrix} 0 & 0 \\ 1 & -1 \\ 1 & 1.5  \end{pmatrix} \begin{pmatrix} 0.5 \\ 1 \end{pmatrix} + \begin{pmatrix} -1\\ 0 \\ 0 \end{pmatrix} = \begin{pmatrix} -1 \\ -1.5 \\ 2 \end{pmatrix} ~~~~~  a^{(1)} = ReLU (h^{(1)}) = \begin{pmatrix} 0 \\ 0 \\ 2 \end{pmatrix} $$
+
+$$ h^{(2)} = (w^{(2)})^T a^{(1)} + b^{(2)} = \begin{pmatrix} 0 & 3 & 1 \end{pmatrix} \begin{pmatrix} 0 \\ 0 \\ 2 \end{pmatrix} - 2 = 0  ~~~~~ y = \sigma(h^{(2)}) = \sigma(0) = 0.5 $$
+
+$$ J = \frac{1}{2} (t - y)^2 = \frac{1}{2} (1 - 0.5)^2 = \frac{1}{8} $$
+
+\noindent Let's first compute $\frac{\partial J}{\partial W^{(1)}}$
+
+$$ \frac{\partial J}{\partial W^{(1)}} = \frac{1}{2} \frac{\partial (1 - y)^2}{\partial W^{(1)}} = 
+-(1 - y) \frac{\partial y}{\partial W^{(1)}} = -0.5 \frac{\sigma(h^{(2)})}{\partial W^{(1)}} = -0.5~  \sigma(h^{(2)}) (1 - \sigma(h^{(2)})) \frac{ \partial h^{(2)} }{\partial W^{(1)}} =  $$
+
+$$ = -\frac{1}{8} \frac{\partial ( (w^{(2)})^T a^{(1)} + b^{(2) ) }}{\partial W^{(1)}} =  -\frac{1}{8}(w^{(2)})^T \frac{\partial a^{(1)}}{\partial W^{(1)}} = -\frac{1}{8}(w^{(2)})^T \frac{\partial ReLU(h^{(1)})}{\partial W^{(1)}} =  $$
+
+$$ = -\frac{1}{8} \begin{pmatrix} 0 & 3 & 1 \end{pmatrix} \begin{pmatrix} 0 \\ 0 \\ 2 \end{pmatrix}  \frac{\partial W^{(1)}x + b^{(1)}}{\partial W^{(1)}} = -\frac{1}{4}x =   -\frac{1}{4} \begin{pmatrix} 0.5 \\ 1 \end{pmatrix}  $$
+
+
+\noindent Let's now compute $\frac{\partial J}{\partial W^{(2)}}$
+
+$$ \frac{\partial J}{\partial W^{(2)}} = \frac{1}{2} \frac{\partial (1 - y)^2}{\partial W^{(2)}} = 
+-(1 - y) \frac{\partial y}{\partial W^{(2)}} = -0.5 \frac{\sigma(h^{(2)})}{\partial W^{(2)}} = -0.5~  \sigma(h^{(2)}) (1 - \sigma(h^{(2)})) \frac{ \partial h^{(2)} }{\partial W^{(2)}} =  $$
+
+$$ = -\frac{1}{8} \frac{\partial ( (w^{(2)})^T a^{(1)} + b^{(2) ) }}{\partial W^{(2)}} = -\frac{1}{8}  a^{(1)}  = -\frac{1}{8} \begin{pmatrix} 0 \\ 0 \\ 2 \end{pmatrix} $$
+
+\newpage
+\noindent 5. We need to compute $ \frac{\partial J}{\partial W^{(1)}}$ and $\frac{\partial J}{\partial b^{(1)}} $
+
+
+$$ h^{(1)} = W^{(1)}x + b^{(1)} = \begin{pmatrix} -1 & 1 \\ 0 & 0 \end{pmatrix} \begin{pmatrix} 1 \\ 0.5 \end{pmatrix} + \begin{pmatrix} 0.5 \\ 0 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix} ~~~~~  a^{(1)} = \sigma(h^{(1)}) = \begin{pmatrix} 0.5 \\ 0.5 \end{pmatrix} $$
+
+
+$$ h^{(2)} = (w^{(2)})^T a^{(1)} + b^{(2)} = \begin{pmatrix} 2 & -2 \end{pmatrix} \begin{pmatrix} 0.5 \\ 0.5 \end{pmatrix} + 0 = 0  ~~~~~ y = \sigma(h^{(2)}) = \sigma(0) = 0.5 $$
+
+$$ J = \frac{1}{2} (t - y)^2 = \frac{1}{2} (1 - 0.5)^2 = \frac{1}{8} $$
+
+\noindent Let's first compute $\frac{\partial J}{\partial W^{(1)}}$
+
+$$ \frac{\partial J}{\partial W^{(1)}} = \frac{1}{2} \frac{\partial (1 - y)^2}{\partial W^{(1)}} = 
+-(1 - y) \frac{\partial y}{\partial W^{(1)}} = -0.5 \frac{\sigma(h^{(2)})}{\partial W^{(1)}} = -0.5~  \sigma(h^{(2)}) (1 - \sigma(h^{(2)})) \frac{ \partial h^{(2)} }{\partial W^{(1)}} =  $$
+
+$$ = -\frac{1}{8} \frac{\partial ( (w^{(2)})^T a^{(1)} + b^{(2) ) }}{\partial W^{(1)}} =  -\frac{1}{8}(w^{(2)})^T \frac{\partial a^{(1)}}{\partial W^{(1)}} = -\frac{1}{8}(w^{(2)})^T \frac{\partial \sigma (h^{(1)})}{\partial W^{(1)}} =  $$
+
+$$ = -\frac{1}{8} \begin{pmatrix}  2 & -2 \end{pmatrix} \begin{pmatrix} 0.25 \\ 0.25 \end{pmatrix}  \frac{\partial W^{(1)}x + b^{(1)}}{\partial W^{(1)}} = 0 $$
+
+\noindent Let's now compute $\frac{\partial J}{\partial b^{(1)}}$
+
+$$ \frac{\partial J}{\partial b^{(1)}} = \frac{1}{2} \frac{\partial (1 - y)^2}{\partial b^{(1)}} = 
+-(1 - y) \frac{\partial y}{\partial b^{(1)}} = -0.5 \frac{\sigma(h^{(2)})}{\partial b^{(1)}} = -0.5~  \sigma(h^{(2)}) (1 - \sigma(h^{(2)})) \frac{ \partial h^{(2)} }{\partial b^{(1)}} =  $$
+
+$$ = -\frac{1}{8} \frac{\partial ( (w^{(2)})^T a^{(1)} + b^{(2) ) }}{\partial b^{(1)}} =  -\frac{1}{8}(w^{(2)})^T \frac{\partial a^{(1)}}{\partial b^{(1)}} = -\frac{1}{8}(w^{(2)})^T \frac{\partial \sigma (h^{(1)})}{\partial b^{(1)}} =  $$
+
+$$ = -\frac{1}{8} \begin{pmatrix}  2 & -2 \end{pmatrix} \begin{pmatrix} 0.25 \\ 0.25 \end{pmatrix}  \frac{\partial W^{(1)}x + b^{(1)}}{\partial b^{(1)}} = 0 $$
+
+
+
+\section{Regularization}
+
+1. iii) and v).
+
+\noindent 2. i) and iii).
+
+\noindent 3. ii) and iii).
+
+\noindent 4. Subsection: 5.2.7.
+
+\section{Optimization}
+
+1. v).
+
+\noindent 2. iii).
+
+\noindent 3. iii) and iv).
+
+\noindent 4. iv).
+
+\noindent 5. ii), iii) and v).
+
+\noindent 6. Section: 6.2.
+
+\noindent 7. Sections: 6.1 and 6.5.
+
+\noindent 8. Section: 6.4
+
+\noindent 9. Subsection: 6.2.2. 
+
+\section{Convolutional Neural Networks}
+
+1. iv).
+
+\noindent 2. i).
+
+\noindent 3. No.
+
+\noindent 4. $1 \times (3 \times 3) \times 4 = 36 $
+
+\noindent 5. $ 10 \times (4 \times 4) = 160$
+
+\noindent 6. $ 10 \times (4 \times 4 ) \times (3 \times 3) = 1440$
+
+\noindent 7. $ 16 \times (3 \times 3) = 144$
+
+\noindent 8. $ 10 \times (4 \times 4) \times (2 \times 2) = 640 $
+
+\noindent 9. $ 10 \times (4 \times 4) \times (3 \times 3) = 1440 $
+
+\noindent 10. $ 3 \times (2 \times 2) \times 3 = 36 $
+
+\noindent 11. $ 10 \times 3 \times (2 \times 2) = 120 $
+
+
+
+\section{Practical Methodology}
+
+1. v).
+
+\noindent 2. The first to consider when building a Neural Network model is how are we going to evaluate the performance of our model. This choice not only depends on the task considered (for example for regression we usually use MSE and for classification tasks we use accuracy) but specially for classification tasks we have also to consider the imbalance of our labels. That's why other performance metrics such as precision, recall, the area below precision/recall curve or f1-score are also used. For regression tasks MSE is always considered the way to go but other performance metrics such as adjusted $R^2$ are also used.
+
+Going forward, when building a Deep Neural Network, it is often a good idea to use an already existing model successful in performing a similar task that the one we are looking to solve. In case we don't have access to that we can just build a Neural Network with a simple architecture (e.g a Neural Network with just one hidden layer or a simple linear machine learning model). In both cases this will serve us as a baseline for the performance of our model.
+
+\newpage
+
+\noindent Once we have the baseline performance of our model we can try to add complexity to our model by adding more hidden layers, changing the number of units in each of them as well as changing the activation functions of those (keep in mind that the final layer activation function should be settled by the task your Neural Network is solving). We will try to find the best configuration of those by performing a grid-search of the various number of hidden layers, number of units for each layer/activation functions for each hidden layer we want to test. Keep in mind that as we increase the number of parameters the grid-search will take more computational time to run. Also consider that adding too much hidden layers leads to overfitting the model. The configuration that gives us the better score with the performance metric chosen on the validation set should be the one we must use when solving this problem.
+
+\noindent 3. When training a Neural Network the goal is to optimize a performance measure. Ideally we should aim to optimize the true error but in Machine Learning the true error is not computable as we don't have access to the true distribution of the data. Instead what learning algorithms try to do is to optimize the empirical error as if the sample size of the available data is large enough the true error and the empirical error are approximately the same. This is called the empirical risk minimization.
+
+This is usually done by training our Deep Neural Networks models by a certain number of epochs. Basically after performing forward propagation we will be able to calculate the loss of the network when comparing the results with the labels of our training data. Then we will backpropagate these results and update the weights of our networks. As iterations go by our networks will get better at learning the data distribution and making predictions out of it. Finally, by using our trained model with unseen data (test data) we will be able to approximate the real true error of our Neural Network.
+
+\section{Sequence Modeling: Recurrent and Recursive Nets}
+
+1. v).
+
+\noindent 2. iv).
+
+\noindent 3. iv).
+
+\noindent 4. v).
+
+\noindent 5. i).
+
+\noindent 6. v).
+
+\noindent 7. i)
+
+\noindent 8. v).
+
+\noindent 9. i).
+
+\noindent 10. iii).
+
+\noindent 11. iv).
+
+\noindent 12. $3 \times (1 + 2 + 3) = 18$
+
+\noindent 13. $1 \times (0 + 1 + 2 + 3) = 6 $
+
+\noindent 14. $ 1 \times (1 + 3 + 5) + 1 \times (1 + 3) + 1 \times 1 = 14$ ?
+
+\noindent 15. $ 1 \times (1 + 2 + 3 + 4) = 10 $
+
+\noindent 16. $ 2 \times (1 + 2 + 3) = 12 $
+
+\noindent 17. $ 3 \times (1 + 2 + 3 + 4 + 5) = 45 $
+
+\noindent 18. $ 2\times (1 + 2 + 3 + 4) = 20 $
+
+\noindent 19. $ 2\times (0 + 1 + 2 + 3) = 12 $
+
+\noindent 20. $ 1\times (1 + 2) + 1 \times (1 + 2 + 3 + 4) = 13 $
+
+\noindent 21. Sections: 8.1. and 8.2. and subsection: 8.5.5.
+
+\noindent 22. Sections: 8.0 and 8.1.
+
+\noindent 23. Section: 8.5.
+
+\noindent 24. Section: 8.4.
+
+\noindent 25. Section: 8.8.
+
+\noindent 26. Section: 8.9.
+
+\noindent 27. Section: 8.10.
+
+\noindent 28. Let's begin by performing some computations.
+
+$$ a_h^{(t=1)} = U x^{(t=1)} + W h^{(t=0)} + b = \begin{pmatrix} 2 & 0 \\ 2 & 2 \end{pmatrix} \begin{pmatrix} 1 \\ -1 \end{pmatrix} + 0 + \begin{pmatrix} 2 \\ 2 \end{pmatrix} = \begin{pmatrix} 2 \\ 0 \end{pmatrix} + \begin{pmatrix} 2 \\ 2 \end{pmatrix} = \begin{pmatrix} 4 \\ 2 \end{pmatrix} $$
+
+$$ h^{(t=1)} = ReLU \left( a_h^{(t=1)} \right) = \begin{pmatrix} 4 \\ 2 \end{pmatrix} $$
+
+$$ a_0^{(t=1)} = V h^{(t=1)} + c = \begin{pmatrix} 1 & -1 \end{pmatrix} \begin{pmatrix} 4 \\ 2 \end{pmatrix} + 6 = 2 + 6 = 8  $$
+
+$$ o^{(t=1)} = \sigma \left( a_0^{(t=1)}  \right) = \sigma(8) \sim 1 $$
+
+$$ a_h^{(t=2)} = U x^{(t=2)} + W h^{(t=1)} + b = \begin{pmatrix} 2 & 0 \\ 2 & 2 \end{pmatrix} \begin{pmatrix} 1 \\ 1 \end{pmatrix} +  \begin{pmatrix} -1 & 1 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} 4 \\ 2 \end{pmatrix}  + \begin{pmatrix} 2 \\ 2 \end{pmatrix} = \begin{pmatrix} 2 \\ 4 \end{pmatrix} +  \begin{pmatrix} -2 \\ 2 \end{pmatrix} + \begin{pmatrix} 2 \\ 2 \end{pmatrix} = \begin{pmatrix} 2 \\ 8 \end{pmatrix}    $$
+
+$$ h^{(t=2)} = ReLU \left( a_h^{(t=2)} \right) = \begin{pmatrix} 2 \\ 8 \end{pmatrix} $$
+
+$$ a_0^{(t=2)} = V h^{(t=2)} + c = \begin{pmatrix} 1 & -1 \end{pmatrix} \begin{pmatrix} 2 \\ 8 \end{pmatrix} + 6 = 0 $$
+
+$$ o^{(t=2)} = \sigma \left( a_0^{(t=2)}  \right) = \sigma(0) = 0.5 $$
+
+\noindent Now we can start to compute the gradient.
+
+$$ \frac{\partial o^{(t=2)}}{\partial U} = \frac{\partial \sigma \left( a_0^{(t=2)} \right)}{\partial U} = \sigma \left( a_0^{(t=2)} \right) \left(  1 - \sigma \left( a_0^{(t=2)} \right) \right) \frac{\partial a_0^{(t=2)}}{\partial U} = \frac{1}{4} \frac{\partial (V h^{(t=2)} + c)}{\partial U} = \frac{1}{4} V  \frac{\partial (h^{(t=2)})}{\partial U} =  $$
+
+$$ = \frac{1}{4} V  \frac{\partial \left(ReLU \left(a_h^{(t=2)} \right)\right)}{\partial U} = \frac{1}{4} V \begin{pmatrix} 1 \\ 0 \end{pmatrix} \frac{\partial a_h^{(t=2)} }{\partial U} = \frac{1}{4} \begin{pmatrix} 1 & -1 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \frac{\partial \left( Ux^{(t=2)} + W h^{(t=1)} + b \right) }{\partial U} = $$ 
+
+$$ = \frac{1}{4} x^{(t=2)} + \frac{1}{4} W \frac{\partial h^{(t=1)}}{\partial U} =  \frac{1}{4} x^{(t=2)} + \frac{1}{4} W  \frac{\partial \left(ReLU \left(a_h^{(t=1)} \right)\right)}{\partial U} = \frac{1}{4} x^{(t=2)} + \frac{1}{4} W  \begin{pmatrix} 1 \\ 0 \end{pmatrix} \frac{\partial a_h^{(t=1)} }{\partial U} = $$
+
+$$ = \frac{1}{4} x^{(t=2)} + \frac{1}{4} W  \begin{pmatrix} 1 \\ 0 \end{pmatrix} \frac{\partial \left( Ux^{(t=1)} + W h^{(t=0)} + b \right) }{\partial U}  = \frac{1}{4} x^{(t=2)} + \frac{1}{4} W  \begin{pmatrix} 1 \\ 0 \end{pmatrix} x^{(t=1)} $$
+
+
+\noindent 29. Let's begin by performing some computations.
+
+$$ a_h^{(t=1)} = U x^{(t=1)} + W h^{(t=0)} + b = \begin{pmatrix} 1 & 2 \\ 2 & -1 \end{pmatrix} \begin{pmatrix} 2 \\ 1 \end{pmatrix} + 0 + \begin{pmatrix} 2 \\ 2 \end{pmatrix} = \begin{pmatrix} 4 \\ 3 \end{pmatrix} + \begin{pmatrix} 2 \\ 2 \end{pmatrix} = \begin{pmatrix} 6 \\ 5 \end{pmatrix} $$
+
+$$ h^{(t=1)} = ReLU \left( a_h^{(t=1)} \right) = \begin{pmatrix} 6 \\ 5 \end{pmatrix} $$
+
+$$ a_0^{(t=1)} = V h^{(t=1)} + c = \begin{pmatrix} 1 & -2 \end{pmatrix} \begin{pmatrix} 6 \\ 5 \end{pmatrix} + 6 = -4 + 6 = 2  $$
+
+$$ o^{(t=1)} = \sigma \left( a_0^{(t=1)}  \right) = \sigma(2) $$
+
+$$ a_h^{(t=2)} = U x^{(t=2)} + W h^{(t=1)} + b = \begin{pmatrix} 1 & 2 \\ 2 & -1 \end{pmatrix} \begin{pmatrix} 1 \\ -1 \end{pmatrix} +  \begin{pmatrix} 2 & 3 \\ 1 & -1 \end{pmatrix} \begin{pmatrix} 6 \\ 5 \end{pmatrix}  + \begin{pmatrix} 2 \\ 2 \end{pmatrix} = \begin{pmatrix} -1 \\ 3 \end{pmatrix} +  \begin{pmatrix} 27 \\ 0 \end{pmatrix} + \begin{pmatrix} 2 \\ 2 \end{pmatrix} = \begin{pmatrix} 28 \\ 5 \end{pmatrix}    $$
+
+$$ h^{(t=2)} = ReLU \left( a_h^{(t=2)} \right) = \begin{pmatrix} 28 \\ 5 \end{pmatrix} $$
+
+$$ a_0^{(t=2)} = V h^{(t=2)} + c = \begin{pmatrix} 1 & -2 \end{pmatrix} \begin{pmatrix} 28 \\ 5 \end{pmatrix} + 6 = 24 $$
+
+$$ o^{(t=2)} = \sigma \left( a_0^{(t=2)}  \right) = \sigma(24) \sim 1 $$
+
+\noindent Now we can start to compute the gradient.
+
+$$ \frac{\partial o^{(t=2)}}{\partial W} = \frac{\partial \sigma \left( a_0^{(t=2)} \right)}{\partial W} = \sigma \left( a_0^{(t=2)} \right) \left(  1 - \sigma \left( a_0^{(t=2)} \right) \right) \frac{\partial a_0^{(t=2)}}{\partial W} = \frac{1}{4} \frac{\partial (V h^{(t=2)} + c)}{\partial W} = \frac{1}{4} V  \frac{\partial (h^{(t=2)})}{\partial W} =  $$
+
+$$ = \frac{1}{4} V  \frac{\partial \left(ReLU \left(a_h^{(t=2)} \right)\right)}{\partial W} = \frac{1}{4} V \begin{pmatrix} 1 \\ 0 \end{pmatrix} \frac{\partial a_h^{(t=2)} }{\partial W} = \frac{1}{4} \begin{pmatrix} 1 & -2 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix} \frac{\partial \left( Ux^{(t=2)} + W h^{(t=1)} + b \right) }{\partial W} = $$ 
+
+$$ = \frac{1}{4} h^{(t=1)} \frac{\partial h^{(t=1)}}{\partial W} =  \frac{1}{4} h^{(t=1)} \frac{\partial \left(ReLU \left(a_h^{(t=1)} \right)\right)}{\partial W} = \frac{1}{4} h^{(t=1)}  \begin{pmatrix} 1 \\ 0 \end{pmatrix} \frac{\partial a_h^{(t=1)} }{\partial W} = $$
+
+$$ = \frac{1}{4} h^{(t=1)}  \begin{pmatrix} 1 \\ 0 \end{pmatrix} \frac{\partial \left( Ux^{(t=1)} + W h^{(t=0)} + b \right) }{\partial W}  = \frac{1}{4} h^{(t=1)} \begin{pmatrix} 1 \\ 0 \end{pmatrix} x^{(t=1)} $$
+
+
+\section{ Graph Convolutional Neural Networks}
+
+1. Section: 9.3.
+
+\noindent 2. Section: 9.3.
+
+\section{ Autoencoders}
+
+1. v).
+
+\noindent 2. iii).
+
+\noindent 3. Sections: 11.2 and 11.1.
+
+\noindent 4. Sections: 11.2 and 11.1.
+
+\section{ Structured Probabilistic Models}
+
+1. i).
+
+\noindent 2. i).
+
+\noindent 3. v).
+
+\noindent 4. i).
+
+\noindent 5. iii).
+
+\noindent 6. ii) and iv).
+
+\noindent 7. v).
+
+\noindent 8. $S_1 = 24, S_2 = 28, S_3=29, S_4=26, S_5=43, S_6=38$
+
+\noindent 9. Sections: 12.0, 12.1, 12.2, 12.4.
+
+\section{ MonteCarlo Methods and Restricted Boltzmann Machines}
+
+1. v).
+
+\noindent 2. Sections: 13.4 and 13.5.
+
+\noindent 3. Section: 13.4.
+
+\noindent 4. 13.5. [Continue]
+
+\noindent 5. Section: 13.5.
+
+\noindent 6. Section: 13.1
+
+\section{ Variational Autoencoders \& Generative Adversarial Networks}
+
+1. Section: 14.2.
+
+\noindent 2. Section: 14.3.
+
+\noindent 3. Sections: 14.1 and 14.3.
+
+\noindent 4. Section: 14.4.
+
+\noindent 5. Section: 14.4.
+
+\noindent 6. Section: 14.4.
+

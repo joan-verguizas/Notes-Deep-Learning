@@ -1,0 +1,29 @@
+\chapter{Back-propagation}
+
+When training a Neural Networks we have two phases: forward propagation and back-propagation. In the forward propagation phase, the input goes through the network producing the network output $\hat{y}$. Given an input x and a neural network with L layers, the forward pass can be expressed as follows: 
+
+Input: $a^{(0)} = x$
+
+For each layer l from 1 to L: $ z^{(l)} = W^{(l)}a^{(l-1)} + b^{(l)}  ~~~~  a^{(l)} = \sigma (z^{(l)}) $
+
+Where $z^{(l)}$ is the weighted sum at layer l, $a^{(l)}$ is the activation (output) at layer l and $\sigma$ is the activation function. At the output layer $a^{(L)} = \hat{y} $
+
+\noindent Using then the targets $y$ of the training data, we will be able to compute the cost function $J(\theta)$ which indicates the amount of error our network makes. The choice of cost function $J(\theta)$ depends on the specific problem. For example, for binary classification, you might use cross-entropy loss:
+
+$$J(\theta) = - \frac{1}{m} \sum_{i=1}^m \left[ y^{(i)}\log(\hat{y}^{(i)}) + (1 - y^{(i)})log(1 - \hat{y}^{(i)}) \right]$$
+
+
+\noindent In order to correct our network so it can learn a parameter set that returns a lesser amount of error we will perform back-propagation. This process consists of computing the gradients of the loss function during the backward pass of training. This determines how much each parameter (weights and biases) contributed to the error in the network's prediction. These gradients, calculated using the chain rule of calculus, guide the adjustments of network parameters to minimize the loss.
+
+The gradients of the cost with respect of the weighted sum $z^{(l)}$: $\delta^{(l)} = \frac{\partial J}{\partial z^{(l)}} $
+
+Gradients of the cost with respect to the weights $ W^{(l)} $: $ \frac{\partial J}{\partial W^{(l)}} = \delta^{(l)}(a^{(l-1)})^{T} $
+
+Gradients of the cost with respect to the biases $ b^{(l)} $: $ \frac{\partial J}{\partial b^{(l)}} = \delta^{(l)} $
+
+
+\noindent Now in order to update those parameters we will need to use an optimization algorithm that updates the network parameters iteratevely in the direction that minimizes the cost function. One of the most common algorithms used to do that is stochastic gradient descent which is a modification of vanilla gradient descent but instead of working with the whole dataset at each iteration it uses a fraction of it. This makes the algorithm more stochastic but at the same time more fast to converge as well as be able to escape saddle points and local minima more easily. SGD therefore efficiently navigates the parameter space to find optimal values by iterating this process a number of N epochs.
+
+$$ W^{(l)}_{t+1} = W^{(l)}_{t} - \eta \frac{\partial J}{\partial W^{(l)}_{t}} ~~~~~ b^{(l)}_{t+1} = b^{(l)}_{t} - \eta \frac{\partial J}{\partial b^{(l)}_{t}} $$
+
+
